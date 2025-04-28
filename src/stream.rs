@@ -113,4 +113,12 @@ impl Stream {
     pub fn from(stream: TcpStream, stream_addr: SocketAddr) -> Self {
         Self::Tcp(tcp::FramedStream::from(stream, stream_addr))
     }
+
+    #[inline]
+    pub fn stream_type(&self) -> String {
+        match self {
+            Stream::WebSocket(_) => "Websocket".to_string(),
+            Stream::Tcp(_) => "TCP".to_string(),
+        }
+    }
 }
